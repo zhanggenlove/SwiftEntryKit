@@ -56,13 +56,37 @@ public extension EKAttributes {
         
         /** Describes translation animation */
         public struct Translate: EKAnimation {
+            
+            /** Describes the anchor position */
+            public enum AnchorPosition {
+                
+                /** Top position - the entry shows from top or exits towards the top */
+                case top
+                
+                /** Bottom position - the entry shows from bottom or exits towards the bottom */
+                case bottom
+                
+                /** Automatic position - the entry shows and exits according to EKAttributes.Position value */
+                case automatic
+            }
+            
+            /** Where from / to the entry animated */
+            public var anchorPosition: AnchorPosition
+            
+            /** Duration of the translation */
             public var duration: TimeInterval
+            
+            /** Delay of the translation */
             public var delay: TimeInterval
+            
+            /** Optional spring on the translation */
             public var spring: Spring?
 
-            public init(duration: TimeInterval, delay: TimeInterval = 0, spring: Spring? = nil) {
-                self.delay = delay
+            /** Initializer for the internal properties */
+            public init(anchorPosition: AnchorPosition = .automatic, duration: TimeInterval, delay: TimeInterval = 0, spring: Spring? = nil) {
+                self.anchorPosition = anchorPosition
                 self.duration = duration
+                self.delay = delay
                 self.spring = spring
             }
         }

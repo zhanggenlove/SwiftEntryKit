@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import QuickLayout
 
 public extension EKAttributes {
 

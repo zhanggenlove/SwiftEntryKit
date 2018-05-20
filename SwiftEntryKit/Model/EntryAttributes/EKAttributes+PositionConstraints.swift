@@ -32,6 +32,26 @@ public extension EKAttributes {
             }
         }
         
+        /** Describes an edge constraint of the entry */
+        public enum Edge {
+                        
+            /** Ratio constraint to screen edge */
+            case ratio(value: CGFloat)
+            
+            /** Offset from each edge of the screen */
+            case offset(value: CGFloat)
+            
+            /** Constant edge length */
+            case constant(value: CGFloat)
+            
+            /** Unspecified edge length */
+            case intrinsic
+            
+            static var fill: Edge {
+                return .offset(value: 0)
+            }
+        }
+        
         /** Describes the size of the entry */
         public struct Size {
             
@@ -53,22 +73,10 @@ public extension EKAttributes {
             public static var sizeToWidth: Size {
                 return Size(width: .offset(value: 0), height: .intrinsic)
             }
-        }
-        
-        /** Describes an edge constraint of the entry */
-        public enum Edge {
             
-            /** Ratio constraint to screen edge */
-            case ratio(value: CGFloat)
-            
-            /** Offset from each edge of the screen */
-            case offset(value: CGFloat)
-            
-            /** Constant edge length */
-            case constant(value: CGFloat)
-            
-            /** Unspecified edge length */
-            case intrinsic
+            public static var screen: Size {
+                return Size(width: .fill, height: .fill)
+            }
         }
         
         /** The relation to the keyboard's top and the screen's top while it is opened */
@@ -133,16 +141,21 @@ public extension EKAttributes {
             return verticalOffset > 0
         }
         
-        /** Returns a full entry (Toast-Like) */
-        public static var full: PositionConstraints {
-            return PositionConstraints(verticalOffset: 0, size: .sizeToWidth)
-        }
-        
         /** Returns a floating entry (Float-Like) */
         public static var float: PositionConstraints {
             return PositionConstraints(verticalOffset: 10, size: .init(width: .offset(value: 20), height: .intrinsic))
         }
         
+        /** A full width entry (Toast-Like) */
+        public static var fullWidth: PositionConstraints {
+            return PositionConstraints(verticalOffset: 0, size: .sizeToWidth)
+        }
+        
+        /** A full screen entry - Fills the entire screen, modal-like */
+        public static var fullScreen: PositionConstraints {
+            return PositionConstraints(verticalOffset: 0, size: .screen)
+        }
+
         /** Initialize with default parameters */
         public init(verticalOffset: CGFloat = 0, size: Size = .sizeToWidth, maxSize: Size = .intrinsic) {
             self.verticalOffset = verticalOffset

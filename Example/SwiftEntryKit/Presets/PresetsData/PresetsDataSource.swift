@@ -276,7 +276,7 @@ struct PresetsDataSource {
         attributes.scroll = .edgeCrossingDisabled(swipeable: true)
         attributes.entranceAnimation = .init(translate: .init(duration: 0.5, spring: .init(damping: 1, initialVelocity: 0)))
         attributes.entryBackground = .gradient(gradient: .init(colors: [EKColor.LightPink.first, EKColor.LightPink.last], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
-        attributes.positionConstraints = .full
+        attributes.positionConstraints = .fullWidth
         attributes.positionConstraints.safeArea = .empty(fillSafeArea: true)
         attributes.roundCorners = .top(radius: 20)
         descriptionString = "Bottom toast popup with gradient background"

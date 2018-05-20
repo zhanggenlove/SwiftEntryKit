@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1424D6B25FF75EE4F37CFFB9 /* Pods_SwiftEntryKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA65C916D2BE756F8485CEE /* Pods_SwiftEntryKitDemo.framework */; };
 		14333AE3208FA09E00DCFC7B /* PresetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14333AE2208FA09E00DCFC7B /* PresetDescription.swift */; };
+		143AF09B20B1604200CAE127 /* DisplayPriorityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143AF09A20B1604200CAE127 /* DisplayPriorityTests.swift */; };
 		143F3AA22090A6A7009F3719 /* ShadowSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F3AA12090A6A7009F3719 /* ShadowSelectionTableViewCell.swift */; };
 		143F3AA42090A70E009F3719 /* RoundCornersSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F3AA32090A70E009F3719 /* RoundCornersSelectionTableViewCell.swift */; };
 		143F3AAA2090AFB8009F3719 /* BackgroundStyleSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F3AA92090AFB8009F3719 /* BackgroundStyleSelectionTableViewCell.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		14333AE2208FA09E00DCFC7B /* PresetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetDescription.swift; sourceTree = "<group>"; };
+		143AF09A20B1604200CAE127 /* DisplayPriorityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPriorityTests.swift; sourceTree = "<group>"; };
 		143F3AA12090A6A7009F3719 /* ShadowSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		143F3AA32090A70E009F3719 /* RoundCornersSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCornersSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		143F3AA92090AFB8009F3719 /* BackgroundStyleSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStyleSelectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		149B2B57208F0C22007C829F /* InAppPresets */ = {
+		149B2B57208F0C22007C829F /* Presets */ = {
 			isa = PBXGroup;
 			children = (
 				14C729C6209447CA0060D267 /* Samples */,
@@ -144,7 +146,7 @@
 				149D0A1120AF1EE7000AA6C4 /* FormFieldPresetFactory.swift */,
 				14A1AB36209371A5001CA5B4 /* PresetsData */,
 			);
-			path = InAppPresets;
+			path = Presets;
 			sourceTree = "<group>";
 		};
 		14A1AB36209371A5001CA5B4 /* PresetsData */ = {
@@ -255,7 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				149B2B57208F0C22007C829F /* InAppPresets */,
+				149B2B57208F0C22007C829F /* Presets */,
 				14C894F3208E70A4003D8CE3 /* Playground */,
 				14C894FC208E7DD0003D8CE3 /* Utils */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				14CF407820AEEA6E00C744D1 /* AttributesCreationTests.swift */,
+				143AF09A20B1604200CAE127 /* DisplayPriorityTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -548,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143AF09B20B1604200CAE127 /* DisplayPriorityTests.swift in Sources */,
 				149D0A0B20AF07EE000AA6C4 /* AttributesCreationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
