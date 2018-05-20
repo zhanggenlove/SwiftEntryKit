@@ -364,8 +364,8 @@ struct PresetsDataSource {
         attributes.position = .center
         attributes.displayDuration = .infinity
         
-        attributes.entranceAnimation = .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0)))
-        attributes.exitAnimation = .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.entranceAnimation = .init(translate: .init(anchorPosition: .bottom, duration: 0.65, spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.exitAnimation = .init(translate: .init(anchorPosition: .top, duration: 0.65, spring: .init(damping: 1, initialVelocity: 0)))
         attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0))))
         
         attributes.entryInteraction = .absorbTouches
@@ -386,6 +386,7 @@ struct PresetsDataSource {
         description = .init(with: attributes, title: "Center Float", description: descriptionString, thumb: descriptionThumb)
         presets.append(description)
         
+        // Preset III
         attributes = .toast
         attributes.windowLevel = .normal
         attributes.position = .bottom
