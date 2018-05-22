@@ -41,9 +41,8 @@ public struct EKAttributes {
      dismisses the content by default */
     public var entryInteraction = UserInteraction.dismiss
 
-    /** Describes the scrolling behaviour of the entry.
-     The entry can be swiped out and in with an ability to spring back with a jolt */
-    public var scroll = Scroll.enabled(swipeable: true, pullbackAnimation: .jolt)
+    /** Describes the scrolling behaviour of the entry. */
+    public var scroll = Scroll(up: .swipable, down: .swipable, pullbackAnimation: .jolt)
     
     /** Generate haptic feedback once the entry is displayed */
     public var hapticFeedbackType = NotificationHapticFeedback.none

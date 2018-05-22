@@ -590,44 +590,65 @@ extension EKContentView {
         handleExitDelayIfNeeded(byPanState: gr.state)
         
         let translation = gr.translation(in: superview!).y
+        let isUp = translation < 0
         
-        if shouldStretch(with: translation) {
-            if attributes.scroll.isEdgeCrossingEnabled {
-                totalTranslation += translation
-                calculateLogarithmicOffset(forOffset: totalTranslation, currentTranslation: translation)
-                
-                switch gr.state {
-                case .ended, .failed, .cancelled:
-                    animateRubberBandPullback()
-                default:
-                    break
-                }
+        if isUp {
+            switch attributes.scroll.up {
+            case .stretch where inConstraint.constant <= inOffset:
+                break // Stretch
+            case .stretch, .free, .swipable:
+                break // Free
+            case .disabled:
+                break // Do nothing
             }
         } else {
+            switch attributes.scroll.down {
+            case .stretch where inConstraint.constant >= inOffset:
+                break // Stretch
+            case .stretch, .free, .swipable:
+                break // Free
+            case .disabled:
+                break // Do nothing
+            }
+        }
+
+//        if shouldStretch(with: translation) {
+//            if attributes.scroll.isEdgeCrossingEnabled {
+//                totalTranslation += translation
+//                calculateLogarithmicOffset(forOffset: totalTranslation, currentTranslation: translation)
+//
+//                switch gr.state {
+//                case .ended, .failed, .cancelled:
+//                    animateRubberBandPullback()
+//                default:
+//                    break
+//                }
+//            }
+//        } else {
             switch gr.state {
             case .ended, .failed, .cancelled:
                 let velocity = gr.velocity(in: superview!).y
-                swipeEnded(withVelocity: velocity)
+//                swipeEnded(withVelocity: velocity)
             case .changed:
                 inConstraint.constant += translation
             default:
                 break
             }
-        }
+//        }
         gr.setTranslation(.zero, in: superview!)
     }
 
-    private func swipeEnded(withVelocity velocity: CGFloat) {
-        let distance = Swift.abs(inOffset - inConstraint.constant)
-        var duration = max(0.3, TimeInterval(distance / Swift.abs(velocity)))
-        duration = min(0.7, duration)
-        
-        if attributes.scroll.isSwipeable && testSwipeVelocity(with: velocity) && testSwipeInConstraint() {
-            stretchOut(usingSwipe: velocity > 0 ? .swipeDown : .swipeUp, duration: duration)
-        } else {
-            animateRubberBandPullback()
-        }
-    }
+//    private func swipeEnded(withVelocity velocity: CGFloat) {
+//        let distance = Swift.abs(inOffset - inConstraint.constant)
+//        var duration = max(0.3, TimeInterval(distance / Swift.abs(velocity)))
+//        duration = min(0.7, duration)
+//
+//        if attributes.scroll.isSwipeable && testSwipeVelocity(with: velocity) && testSwipeInConstraint() {
+//            stretchOut(usingSwipe: velocity > 0 ? .swipeDown : .swipeUp, duration: duration)
+//        } else {
+//            animateRubberBandPullback()
+//        }
+//    }
     
     private func stretchOut(usingSwipe type: OutTranslation, duration: TimeInterval) {
         outDispatchWorkItem?.cancel()
@@ -659,19 +680,19 @@ extension EKContentView {
     }
     
     private func animateRubberBandPullback() {
-        totalTranslation = verticalLimit
-    
-        let animation: EKAttributes.Scroll.PullbackAnimation
-        if case .enabled(swipeable: _, pullbackAnimation: let pullbackAnimation) = attributes.scroll {
-            animation = pullbackAnimation
-        } else {
-            animation = .easeOut
-        }
-
-        UIView.animate(withDuration: animation.duration, delay: 0, usingSpringWithDamping: animation.damping, initialSpringVelocity: animation.initialSpringVelocity, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
-            self.inConstraint?.constant = self.inOffset
-            self.superview?.layoutIfNeeded()
-        }, completion: nil)
+//        totalTranslation = verticalLimit
+//
+//        let animation: EKAttributes.Scroll.PullbackAnimation
+//        if case .enabled(swipeable: _, pullbackAnimation: let pullbackAnimation) = attributes.scroll {
+//            animation = pullbackAnimation
+//        } else {
+//            animation = .easeOut
+//        }
+//
+//        UIView.animate(withDuration: animation.duration, delay: 0, usingSpringWithDamping: animation.damping, initialSpringVelocity: animation.initialSpringVelocity, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
+//            self.inConstraint?.constant = self.inOffset
+//            self.superview?.layoutIfNeeded()
+//        }, completion: nil)
     }
     
     private func testSwipeInConstraint() -> Bool {

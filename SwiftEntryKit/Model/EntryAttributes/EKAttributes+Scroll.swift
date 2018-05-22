@@ -10,9 +10,34 @@ import Foundation
 extension EKAttributes {
     
     /** Describes the event of scroll user interaction */
-    public enum Scroll {
+    public struct Scroll {
     
-        /** Describes the event when the user leaves the entry after rubber-banding it - How the entry behaves */
+        /** The degree of the scroll direction */
+        public enum Degree {
+            
+            /** The lowest scroll degree - the scroll is totally disabled */
+            case disabled
+            
+            /** Scroll stretches the entry (Rubber Band) */
+            case stretch
+            
+            /** Scrolling is free, but not swipable*/
+            case free
+            
+            /** The highest scroll degree, totally free and swipable */
+            case swipable
+            
+            /** Returns true if the value is not *.disabled* */
+            public var isEnabled: Bool {
+                return self != .disabled
+            }
+            
+            public var isStretch: Bool {
+                return self == .stretch
+            }
+        }
+        
+        /** Describes the event when the user leaves the entry after scrolling it - how it goes back into its place */
         public struct PullbackAnimation {
             public var duration: TimeInterval
             public var damping: CGFloat
@@ -35,40 +60,30 @@ extension EKAttributes {
             }
         }
         
-        /** The scroll ability is totally disabled */
-        case disabled
+        /** Scroll up degree */
+        public var up: Degree
         
-        /** The scroll in the opposite direction to the edge is disabled */
-        case edgeCrossingDisabled(swipeable: Bool)
+        /** Scroll down degree */
+        public var down: Degree
         
-        /** The scroll abiliby is enabled */
-        case enabled(swipeable: Bool, pullbackAnimation: PullbackAnimation)
+        /** Pullback animation descriptor */
+        public var pullbackAnimation: PullbackAnimation
         
-        var isEnabled: Bool {
-            switch self {
-            case .disabled:
-                return false
-            default:
-                return true
-            }
+        /** Returns true if any of the scroll directions is enabled */
+        public var isEnabled: Bool {
+            return up.isEnabled && down.isEnabled
         }
         
-        var isSwipeable: Bool {
-            switch self {
-            case .edgeCrossingDisabled(swipeable: let swipeable), .enabled(swipeable: let swipeable, pullbackAnimation: _):
-                return swipeable
-            default:
-                return false
-            }
+        /** Returns disabled scroll property */
+        public static var disabled: Scroll {
+            return Scroll(up: .disabled, down: .disabled)
         }
         
-        var isEdgeCrossingEnabled: Bool {
-            switch self {
-            case .edgeCrossingDisabled:
-                return false
-            default:
-                return true
-            }
+        /** Initializer */
+        public init(up: Degree, down: Degree, pullbackAnimation: PullbackAnimation = .easeOut) {
+            self.up = up
+            self.down = down
+            self.pullbackAnimation = pullbackAnimation
         }
     }
 }

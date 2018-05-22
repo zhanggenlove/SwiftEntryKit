@@ -18,7 +18,9 @@ public extension EKAttributes {
         attributes.positionConstraints = .fullWidth
         attributes.positionConstraints.safeArea = .empty(fillSafeArea: true)
         attributes.windowLevel = .statusBar
-        attributes.scroll = .edgeCrossingDisabled(swipeable: true)
+        
+        // TODO: Uncomment
+//        attributes.scroll = .edgeCrossingDisabled(swipeable: true)
         attributes.popBehavior = .animated(animation: .translation)
         return attributes
     }
